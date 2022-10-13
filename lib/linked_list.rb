@@ -1,4 +1,6 @@
-require 'pry-byebug'
+# frozen_string_literal: true
+
+# A class for creating nodes to be stored in a linked list
 class Node
   attr_accessor :value, :next_node
 
@@ -8,6 +10,7 @@ class Node
   end
 end
 
+# Class containing methods for working with a linked list
 class LinkedList
   def initialize
     @head = nil
@@ -57,7 +60,7 @@ class LinkedList
   end
 
   def at(index)
-    return @head.value if index == 0
+    return @head.value if index.zero?
 
     node = @head.next_node
     count = 1
@@ -69,7 +72,7 @@ class LinkedList
   end
 
   def pop
-    return "Cannot delete" if @head.nil?
+    return 'Cannot delete' if @head.nil?
 
     node = @head
     prev = nil
@@ -88,6 +91,7 @@ class LinkedList
     node = @head
     until node.next_node.nil?
       return true if node.value == value
+
       node = node.next_node
     end
     false
@@ -100,6 +104,7 @@ class LinkedList
     node = @head
     while index < self.size
       return index if node.value == value
+
       index += 1
       node = node.next_node
     end
@@ -115,12 +120,12 @@ class LinkedList
   end
 
   def insert_at(value, index)
-    prepend(value) if index == 0
+    prepend(value) if index.zero?
 
     node = @head
     prev = nil
     count = 0
-    
+
     until count == index
       prev = node
       node = node.next_node
@@ -132,9 +137,7 @@ class LinkedList
   end
 
   def remove_at(index)
-    #once at index
-    #prev links to current + 1
-    if index == 0
+    if index.zero?
       @head = @head.next_node
     else
       node = @head
@@ -153,5 +156,3 @@ class LinkedList
     end
   end
 end
-
-list = LinkedList.new
