@@ -1,4 +1,4 @@
-
+require 'pry-byebug'
 class Node
   attr_accessor :value, :next_node
 
@@ -78,7 +78,7 @@ class LinkedList
       prev = node
       node = node.next_node
     end
-    prev.next_node == nil
+    prev.next_node = nil
     @tail = prev
   end
 
@@ -119,5 +119,11 @@ list = LinkedList.new
 list.append(8)
 list.append(7)
 list.append(4)
+list.prepend(1)
+list.prepend(2)
+list.pop
+puts list.tail
+
+
 
 list.to_s
