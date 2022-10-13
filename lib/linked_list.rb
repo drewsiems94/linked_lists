@@ -113,17 +113,45 @@ class LinkedList
     end
     print "( #{node.value} ) -> nil"
   end
+
+  def insert_at(value, index)
+    prepend(value) if index == 0
+
+    node = @head
+    prev = nil
+    count = 0
+    
+    until count == index
+      prev = node
+      node = node.next_node
+      count += 1
+    end
+    temp = Node.new(value)
+    prev.next_node = temp
+    temp.next_node = node
+  end
+
+  def remove_at(index)
+    #once at index
+    #prev links to current + 1
+    if index == 0
+      @head = @head.next_node
+    else
+      node = @head
+      prev = nil
+      count = 0
+      until count == index
+        prev = node
+        node = node.next_node
+        count += 1
+      end
+      if node.next_node.nil?
+        self.pop
+      else
+        prev.next_node = node.next_node
+      end
+    end
+  end
 end
 
 list = LinkedList.new
-list.append(8)
-list.append(7)
-list.append(4)
-list.prepend(1)
-list.prepend(2)
-list.pop
-puts list.tail
-
-
-
-list.to_s
