@@ -80,37 +80,24 @@ class LinkedList
   end
 
   def contains?(value)
-    return true if @head.value == value || @tail.value == value
-
-    node = @head
-    until node.next_node.nil?
-      return true if node.value == value
-
-      node = node.next_node
+    self.each_w_index do |num, i|
+      return true if num == value
     end
     false
   end
 
   def find(value)
-    return nil if !contains?(value)
-
-    index = 0
-    node = @head
-    while index < self.size
-      return index if node.value == value
-
-      index += 1
-      node = node.next_node
+    self.each_w_index do |num, i|
+      return i if num == value
     end
+    nil
   end
 
   def to_s
-    node = @head
-    until node.next_node.nil?
-      print "( #{node.value} ) -> "
-      node = node.next_node
+    self.each_w_index do |num, i|
+      print "( #{num} ) -> "
     end
-    print "( #{node.value} ) -> nil"
+    print 'nil'
   end
 
   def insert_at(value, index)
@@ -160,12 +147,3 @@ class LinkedList
     end
   end
 end
-
-list = LinkedList.new
-list.append(1)
-list.append(5)
-list.append(7)
-
-puts list.at(0)
-puts list.at(1)
-puts list.at(2)
