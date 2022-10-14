@@ -60,15 +60,9 @@ class LinkedList
   end
 
   def at(index)
-    return @head.value if index.zero?
-
-    node = @head.next_node
-    count = 1
-    while count < index
-      node = node.next_node
-      count += 1
+    self.each_w_index do |num, i|
+      return num if i == index
     end
-    node.value
   end
 
   def pop
@@ -155,4 +149,23 @@ class LinkedList
       end
     end
   end
+
+  def each_w_index
+    node = @head
+    index = 0
+    while index < self.size
+      yield(node.value, index)
+      node = node.next_node
+      index += 1
+    end
+  end
 end
+
+list = LinkedList.new
+list.append(1)
+list.append(5)
+list.append(7)
+
+puts list.at(0)
+puts list.at(1)
+puts list.at(2)
